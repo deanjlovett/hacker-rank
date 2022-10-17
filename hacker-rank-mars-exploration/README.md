@@ -93,3 +93,12 @@ SOSSOSSOS
 ### Explanation 2
 
 Since no character is altered, return 0.
+
+
+# how to run
+
+### To Run javascript version:
+
+node me.js < output00.txt > output00.txt
+
+

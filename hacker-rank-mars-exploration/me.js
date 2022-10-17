@@ -34,28 +34,39 @@ function marsExploration(s) {
     const key='SOS';
     let sa = s.toUpperCase().split('');
     let count = 0;
-    for(let i=0,j=1,k=2; i<s.length; i+=3,j+=3,k+=3){
-        if( sa[i] != key[0]) ++count; 
-        if( sa[j] != key[1]) ++count; 
-        if( sa[k] != key[2]) ++count;
+    // for(let i=0,j=1,k=2; i<s.length; i+=3,j+=3,k+=3){
+    //     if( sa[i] != key[0]) ++count; 
+    //     if( sa[j] != key[1]) ++count; 
+    //     if( sa[k] != key[2]) ++count;
+    // }
+    for(let i=0; i<s.length; ){
+        for(let j=0;j<3;++j,++i){
+            if( sa[i] != key[j]){
+                ++count; 
+            } 
+        }
     }
+
     return count;
 }
 
 function main() {
-    const default_output_file = 'output.txt';
-    const outout_file_name = process.env.OUTPUT_PATH || default_output_file;
-    const ws = fs.createWriteStream(outout_file_name);
+
+    if( ! __.parseCommandLineArgs() ){
+        return 0;
+    }
 
     const s = readLine();
 
     const result = marsExploration(s);
-
-    ws.write(result + '\n');
-    if(outout_file_name === default_output_file){
+    
+    if( process.env.OUTPUT_PATH ) {
+        const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+        ws.write(result + '\n');
+        ws.end();
+    }else{
         __.clog(result);
+        __.slog(result);
     }
-
-    ws.end();
 
 }
