@@ -47,7 +47,9 @@ We promptly judged antique ivory buckles for the next prize
 
 ### Sample Output 0
 
+```
 pangram
+```
 
 ### Sample Explanation 0
 
@@ -61,7 +63,9 @@ We promptly judged antique ivory buckles for the prize
 
 ### Sample Output 1
 
+```
 not pangram
+```
 
 ### Sample Explanation 0
 
@@ -70,7 +74,7 @@ The string lacks an x.
 
 # notes
 
-solutions in javascript, typescript, python 3, C, & C++
+solutions in javascript, typescript, python 3, Java, C, & C++ 
 
 # how to run
 
