@@ -35,7 +35,7 @@ A single line with string ***s***.
 
 0 < length of ***s*** ≤ 10³
 
-Each character of ***s***, ***s***[***i***] ∈ {***a - z, A - Z, space ***}
+Each character of ***s***, ***s***[***i***] ∈ {***a - z, A - Z, space***}
 
 ### Sample Input
 
