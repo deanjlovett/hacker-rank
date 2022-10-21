@@ -34,19 +34,23 @@ function pangrams(s: string): string {
     // Write your code here
     let myset = new Set( s.toLowerCase().split('') )
     myset.delete(' ');
-    const size = myset.size;
-    let ret:string = 'pangram';
+    const size: number = myset.size;
+    let ret: string = 'pangram';
     return size === 26 ? ret : 'not ' + ret;
 }
 
 function main() {
-    const ws: WriteStream = createWriteStream(process.env['OUTPUT_PATH']);
-
+    
     const s: string = readLine();
-
+    
     const result: string = pangrams(s);
 
-    ws.write(result + '\n');
+    if(process.env['OUTPUT_PATH']) {
+        const ws: WriteStream = createWriteStream(process.env['OUTPUT_PATH']);
+        ws.write(result + '\n');
+        ws.end();
+    }else{
+        console.log(result);
+    }
 
-    ws.end();
 }

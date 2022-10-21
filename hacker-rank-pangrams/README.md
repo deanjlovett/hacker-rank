@@ -67,6 +67,11 @@ not pangram
 
 The string lacks an x.
 
+
+# notes
+
+solutions in javascript, typescript, python 3, C, & C++
+
 # how to run
 
 ### To Run javascript version:
