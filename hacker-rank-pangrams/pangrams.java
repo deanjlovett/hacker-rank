@@ -22,19 +22,15 @@ class Result {
     public static String pangrams(String s) {
         // Write your code here
 
+        String t = s.toLowerCase();
         HashSet<Character> myset = new HashSet<Character>();
-        for(int i=0; i<s.length(); ++i){
-            if( s.charAt(i) != ' '){
-                myset.add( s.charAt(i) );
+        for(int i=0; i<t.length(); ++i){
+            if( t.charAt(i) != ' '){
+                myset.add( t.charAt(i) );
             }
         }
-
         return myset.size() == 26 ? "pangram" : "not pangram";
-
     }
-
-
-
 }
 
 public class Solution {
