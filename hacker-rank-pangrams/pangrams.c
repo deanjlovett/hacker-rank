@@ -51,6 +51,7 @@ char* pangrams(char* s) {
             *p -= 32;
         }
     }
+
     int map_size = 27;
     int map[map_size];
     
