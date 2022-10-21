@@ -46,11 +46,18 @@ char* pangrams(char* s) {
     strncpy( t, s, size );
     
     int i = 0;
-    for( char* p=t; i<size;++p,++i){
+    for( char *p=t; i<size;++p,++i){
         if( *p >='a' && *p <= 'z'){
             *p -= 32;
         }
     }
+    // alternate
+    //
+    // for( char *p=t; *p;++p){
+    //     if( *p >='a' && *p <= 'z'){
+    //         *p -= 32;
+    //     }
+    // }
 
     int map_size = 27;
     int map[map_size];
@@ -62,9 +69,14 @@ char* pangrams(char* s) {
     
     i = 0;
     for( char *p=t; i<size; ++i,++p){
-        // if( *p == 32               ) map[*p-32] = 1;
         if( *p >= 'A' && *p <= 'Z' ) map[*p-64] = 1;
     }
+    // alternate
+    //
+    // for( char *p=t; *p; ++p){
+    //     if( *p >= 'A' && *p <= 'Z' ) map[*p-64] = 1;
+    // }
+
 
     int count = 0;
     i = 0;
