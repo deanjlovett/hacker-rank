@@ -34,9 +34,7 @@ function pangrams(s) {
     
     let myset = new Set( s.toLowerCase().split('') )
     myset.delete(' ');
-    const size = myset.size;
-    let ret = 'pangram';
-    return size === 26 ? ret : 'not ' + ret;
+    return myset.size === 26 ? 'pangram' : 'not pangram';
 }
 
 function main() {
