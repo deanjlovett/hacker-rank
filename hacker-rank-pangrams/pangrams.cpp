@@ -15,9 +15,6 @@ using namespace std;
  */
 
 string pangrams(string s) {
-    string    sPangram =     "pangram";
-    string sNotPangram = "not pangram";
-    
     transform(
         s.begin(), s.end(), s.begin(),
         [](unsigned char c){ return std::tolower(c); }
@@ -28,8 +25,8 @@ string pangrams(string s) {
             mySet.insert(s[i]);        
         }
     }
-    
-    return mySet.size() == 26 ? sPangram : sNotPangram;
+
+    return mySet.size() == 26 ? "pangram" : "not pangram";
 }
 
 int main()

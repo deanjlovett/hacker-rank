@@ -38,8 +38,6 @@ char* readline();
  *
  */
 char* pangrams(char* s) {
-    static char     pangram[] =     "pangram";
-    static char not_pangram[] = "not pangram";
     
     size_t size = strlen(s)+1;
     char *t = (char*) calloc( size, sizeof(char) );
@@ -51,16 +49,17 @@ char* pangrams(char* s) {
             *p -= 32;
         }
     }
+
     // alternate
     //
-    // for( char *p=t; *p;++p){
+    // for( char *p=t; *p; ++p ){
     //     if( *p >='a' && *p <= 'z'){
     //         *p -= 32;
     //     }
     // }
 
     int map_size = 27;
-    int map[map_size];
+    char map[map_size];
     
     i = 0;
     for( ; i<map_size; ++i){
@@ -72,21 +71,26 @@ char* pangrams(char* s) {
         if( *p >= 'A' && *p <= 'Z' ) map[*p-64] = 1;
     }
     // alternate
-    //
+    // for( int i=0; i<map_size; ++i ){
+    //     map[i] = 0;
+    // }
+    
     // for( char *p=t; *p; ++p){
-    //     if( *p >= 'A' && *p <= 'Z' ) map[*p-64] = 1;
+    //     if( *p >= 'A' && *p <= 'Z' ){
+    //         map[*p-64] = *p;
+    //     }
     // }
 
 
     int count = 0;
-    i = 0;
+    int i = 0;
     for( int *pi=map; i<map_size; ++i,++pi){
         if( *pi ){
             ++count;
         }
     }
-    
-    return count == 26 ? pangram : not_pangram;
+
+    return count == 26 ? "pangram" : "not pangram";
 }
 
 int main()
