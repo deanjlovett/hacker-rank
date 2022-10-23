@@ -24,6 +24,7 @@ function readLine() {
 }
 
 const clog = __.clog;
+const dlog = __.dlog;
 
 
 /*
@@ -44,11 +45,11 @@ function roadsAndLibraries_debug(n, c_lib, c_road, cities) {
     // c_road : cost to build road
     // cities : connections between cities
 
-    function clog(...args){return;}
-    clog('inside roadsAndLibraries()');
-    clog(' # cities:', n);
-    clog(' lib cost:', c_lib);
-    clog('road cost:', c_road);
+    // function clog(...args){return;}
+    dlog('inside roadsAndLibraries()');
+    dlog(' # cities:', n);
+    dlog(' lib cost:', c_lib);
+    dlog('road cost:', c_road);
 
     let cn = [0];
     for(let i=1;i<=n;++i){
@@ -59,8 +60,11 @@ function roadsAndLibraries_debug(n, c_lib, c_road, cities) {
         if(a[0]!=b[0]) return a[0]-b[0]; 
         return a[1]-b[1]; 
     });
-    clog('proads:');
-    clog(proads);
+    dlog('proads: size:',proads.size);
+    dlog(proads.size);
+    let emptyc = 0;
+    proads.forEach
+    dlog(proads);
 
     let myMast = new Set();
     let myMap = new Map();
@@ -115,28 +119,28 @@ function roadsAndLibraries_debug(n, c_lib, c_road, cities) {
             myMap.set(keyOne,myObj);
         }
     }
-    clog()
-    clog('myNS:')
-    clog(myNS)
+    dlog()
+    dlog('myNS:')
+    dlog(myNS)
     myNS.forEach((valNodeTwoObj,keyNodeOne)=>{
         valNodeTwoObj.forEach((valDist,keyNodeTwo)=>{
             AddToMap(keyNodeOne,keyNodeTwo,valDist);
             AddToMap(keyNodeTwo,keyNodeOne,valDist);
         });
     });
-    clog()
-    clog('myMap:')
-    clog(myMap)
+    dlog()
+    dlog('myMap:')
+    dlog(myMap)
 
 
     function eatTheChilds(idx,depth){
-        // clog(`eatTheChilds(idx:${idx},depth:${depth})`)
+        // dlog(`eatTheChilds(idx:${idx},depth:${depth})`)
         let count = 0;
         if( myMap.has(idx) ) {
             myMast.add(idx);
             let obj = myMap.get(idx);
-            clog('obj.childs:');
-            clog(obj.childs);
+            dlog('obj.childs:');
+            dlog(obj.childs);
             obj.childs.forEach((e)=>{
                 if( ! myMast.has(e) ) {
                     count += 1 + eatTheChilds(e,depth+1);
@@ -167,22 +171,32 @@ function roadsAndLibraries_debug(n, c_lib, c_road, cities) {
             obj.dist = eatTheChilds(i,0);
         }
     }
-    clog()
-    clog('myMap:')
-    clog(myMap)
+    dlog()
+    dlog('myMap:')
+    dlog(myMap)
     clog()
     clog(' # cities:', n);
     clog(' lib cost:', c_lib);
     clog('road cost:', c_road);
+    clog()
     
     let justLibs = n * c_lib;
     let libsNRoads = c_lib * myMap.size;
-    clog(' libs         :', libsNRoads);
-
-    myMap.forEach(e=>{libsNRoads += c_road * e.dist})
+    clog(' node groups   :', myMap.size);
+    clog(' libs cost     :', myMap.size, '*',c_lib,'=',libsNRoads);
+    clog(' # roads       :');
+    let roads =0;
+    let roadtc =0
+    myMap.forEach(e=>{
+        roads += e.dist;
+        // if(e.dist>0) clog('               :',e.dist,c_road * e.dist);
+        roadtc += c_road * e.dist
+    });
+    clog(' # roads       :',roads, '*',c_road,'=',roadtc);
+    libsNRoads += roadtc;
     clog()
-    clog('     just libs:', justLibs);
     clog(' libs  & Roads:', libsNRoads);
+    clog('     just libs:', justLibs);
 
 
 
@@ -345,7 +359,7 @@ function main() {
                 .map(citiesTemp => parseInt(citiesTemp, 10));
         }
 
-        const result = roadsAndLibraries(n, c_lib, c_road, cities);
+        const result = roadsAndLibraries_debug(n, c_lib, c_road, cities);
 
         if( ws != undefined) {
             ws.write(result + '\n');
