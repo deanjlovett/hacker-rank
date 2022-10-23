@@ -1,5 +1,7 @@
 'use strict';
 
+const { constants } = require("buffer");
+
 /*
 
 put this in ./util folder
@@ -41,6 +43,9 @@ function clog(...args){ if(              !_isSilent) console.log(...args);}
 function dlog(...args){ if(_isDebug   && !_isSilent) console.log(...args);}
 function vlog(...args){ if(_isVerbose && !_isSilent) console.log(...args);}
 function slog(...args){ if(               _isSilent) console.log(...args);}
+function  log(...args){console.log(...args);}
+const sclog = log;
+const cslog = log;
 
 function setInputFilename(s){_inFile=s;}
 function getInputFilename(){return _inFile;}
@@ -260,7 +265,7 @@ module.exports = {
   getIsSilent, getIsVerbose, getIsDebug,
   setRange, getRange,
   progdot,
-  clog, dlog, vlog, slog,
+  clog, dlog, vlog, slog, log,sclog,cslog,
   getNumbersFromCommandLine,
   getStringsFromCommandLine,
   parseCommandLineArgs,
