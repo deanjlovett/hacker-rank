@@ -84,7 +84,7 @@ The characters marked with arrows are the ones that can be deleted so that the s
 
 # **notes**
 
-solutions in javascript, typescript, python 3, Java, C, & C++ 
+solutions in javascript, python 3, C, & C++ 
 
 # **how to run**
 

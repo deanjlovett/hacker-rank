@@ -40,17 +40,19 @@ function alternatingCharacters(s) {
 }
 
 function main() {
-    const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
-
     const q = parseInt(readLine().trim(), 10);
+    
+    let ws = process.env.OUTPUT_PATH || undefined;
+    if(ws != undefined) ws = fs.createWriteStream(process.env.OUTPUT_PATH);
 
     for (let qItr = 0; qItr < q; qItr++) {
         const s = readLine();
-
         const result = alternatingCharacters(s);
-
-        ws.write(result + '\n');
+        if( ws != undefined ){
+            ws.write(result + '\n');
+        }else{
+            console.log(result);
+        }
     }
-
-    ws.end();
+    if( ws != undefined ) ws.end();
 }
