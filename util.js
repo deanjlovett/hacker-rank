@@ -53,8 +53,8 @@ function getInputFilename(){return _inFile;}
 function setOutputFilename(s){_outFile=s;}
 function getOutputFilename(){return _outFile;}
 
-function setOtherFilename(s){_otherFile=s;}
-function getOtherFilename(){return _otherFile;}
+function setFilename(s){_otherFile=s;}
+function getFilename(){return _otherFile;}
 
 function setValidateFilename(s){_validateFile=s;}
 function getValidateFilename(){return _validateFile;}
@@ -97,7 +97,7 @@ function parseCommandLineArgs(name='something',extraArr=[]){
       {key:['-s','--silent'               ],           val: setSilent  },
       {key:['-i','--in','--input'         ], params:1, val: setInputFilename  },
       {key:['-o','--out','--output'       ], params:1, val: setOutputFilename  },
-      {key:['-f','--file'                 ], params:1, val: setOtherFilename  },
+      {key:['-f','--file'                 ], params:1, val: setFilename  },
       {key:['--val','--valid','--validate'], params:1, val: setValidateFilename  },
       {key:['-r','--range'                ], params:3, val: setRange },
 
@@ -215,10 +215,15 @@ function parseCommandLineArgs(name='something',extraArr=[]){
     dlog()
     dlog('calling args: ',smyArgs)
     dlog()
+    if( _inFile || _outFile || _otherFile || _validateFile 
+      || _isVerbose || _isDebug || _range.inc !== 0)
+    {
+        clog();
+    }
     if(_inFile.length>0)       clog('    input filename:', _inFile  )
     if(_outFile.length>0)      clog('   output filename:', _outFile )
     if(_otherFile.length>0)    clog('    other filename:', _otherFile )
-    if(_validateFile.length>0) clog(' validate filename:', _otherFile )
+    if(_validateFile.length>0) clog(' validate filename:', _validateFile )
     if(_isVerbose)             clog('    verbose set to:', _isVerbose)
     if(_isDebug)               clog('      debug set to:', _isDebug)
     if(_range.inc !== 0)       clog('   range is set to:', _range)
@@ -269,6 +274,12 @@ module.exports = {
   getNumbersFromCommandLine,
   getStringsFromCommandLine,
   parseCommandLineArgs,
+  
+  setInputFilename,getInputFilename,
+  setOutputFilename,getOutputFilename,
+  setFilename,getFilename,
+  setValidateFilename,getValidateFilename,
+
   factorial
 };
 
