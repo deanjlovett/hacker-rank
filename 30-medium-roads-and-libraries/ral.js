@@ -72,128 +72,160 @@ function roadsAndLibraries_debug(n, c_lib, c_road, cities) {
         proads.push(e);
         myNS.get( e[0] ).add( e[1] );
     });
-
-    // proads.sort((a,b)=>{
-    //     if( a[0] != b[0] ) return a[0]-b[0]; 
-    //     return a[1]-b[1]; 
-    // });
-    // dlog();
-    // dlog('cities: size:',cities.length);
-    // // dlog('cities      :',cities);
-    // dlog();
-    // dlog('proads: size:',proads.length);
-    // // dlog('proads:     :',proads);
-    // dlog()
-    // dlog('myNS:size:',myNS.size)
-    // dlog('myNS:')
-    // dlog('Map {');
-    // let emptyNS = []
-    // myNS.forEach((e,i)=>{
-    //     if( e.size != 0 ){
-    //         // dlog(' ',i,'=>',e);
-    //     }else{
-    //         emptyNS.push(i);
-    //     }
-    // });
-    // dlog('}');
-    // dlog('myNS: empty nodes:',emptyNS)
-
+    dlog('cities:',cities)
+    dlog('  myNS:',myNS)
+    // now myNS is a map from a city to a set of cities it CAN have roads to
+    // key: city # value: set of other cities
+    // the child cities will always have a larger #
 
     let myMast = new Set();
     let myMap = new Map();
-
-
-    function AddToMap(keyOne,keyTwo){
-        // dlog(`    inside function AddToMap(keyOne:${keyOne},keyTwo:${keyTwo},dist:${dist}){`);
-
-        if(keyOne === keyTwo) return;
-
-        // if( keyOne > keyTwo ){
-        //     let tmp = keyOne;
-        //     keyOne = keyTwo;
-        //     keyTwo = tmp;
-        // }
-
-        //
-        // concept:  custer merger
-        //
-        // two clusters may meet.
-        // lowest cluster number becomes the cluster number for new cluster.
-        // by using cluster number container, we can update ALL the cluster numbers 
-        // on every node in a cluster by updaing the value in one node's cluster containter.
-        // 
-
-        if( myMap.has(keyOne) ){
-            let obj = myMap.get(keyOne);
-            obj.childs.add(keyTwo);
-            obj.descendents.add(keyTwo);
-            if( ! myMap.has(keyTwo) ){
-                let objTwo = myMap.get(keyTwo);
-                if( obj.cluster.number > objTwo.cluster.number ){ // merge
-                    objTwo.cluster.members = 
-                        new Set(
-                            ...objTwo.cluster.members,
-                            ...obj.cluster.members
-                        );
-                    obj.cluster.number  = objTwo.cluster.number;
-                    obj.cluster.members = objTwo.cluster.members;
-                }
-                else if( obj.cluster.number < objTwo.cluster.number ){
-                    obj.cluster.members = 
-                    new Set(
-                        ...obj.cluster.members,
-                        ...objTwo.cluster.members
-                    );
-
-                    objTwo.cluster.number  = obj.cluster.number;
-                    objTwo.cluster.members = obj.cluster.members;
-                }
-                else{ // if( obj.cluster.cluster_number == objTwo.cluster.cluster_number ){
-                    // chill... do nothinng with the clusters
-                }
-
-            }else{
-                obj.cluster.cluser_members.add(keyTwo)
-                myMap.set(
-                    keyTwo,
-                    {
-                        key:         keyTwo,
-                        childs:      new Set(),
-                        descendents: new Set(),
-                        dist:        -1, 
-                        cluster: obj.cluster
-                    }
-                );    
+    for( let i=1; i<=n; ++i ){
+        myMap.set(
+            i,
+            {
+                key:         i,
+                childs:      new Set(...[myNS.get(i)]),
+                descendents: new Set(...[myNS.get(i)]),
+                dist:        -1, 
+                cluster:     {number:i, members:new Set([i])},
+                isTouched: false,
             }
-        }else{
-            let cluster_name_container = {number:keyOne, members:new set([keyOne])}
-            myMap.set(
-                keyOne,
-                {
-                    key:         keyOne,
-                    childs:      new Set([keyTwo]),
-                    descendents: new Set([keyTwo]),
-                    dist:        -1, 
-                    cluster: cluster_name_container
-                }
-            );
-        }
+        );    
     }
-    // dlog()
-    // dlog('myNS:')
-    // dlog(myNS)
-    myNS.forEach((valNodeTwoObj,keyNodeOne)=>{
-        valNodeTwoObj.forEach((valDist,keyNodeTwo)=>{
-            AddToMap(keyNodeOne,keyNodeTwo);
-            // AddToMap(keyNodeTwo,keyNodeOne);
+    dlog(' myMap:',myMap)
+
+
+    // function AddToMap(keyOne,keyTwo){
+
+    //     if(keyOne === keyTwo) return; // just in case there is bad data
+
+    //     //
+    //     // concept:  custer merger
+    //     //
+    //     // two clusters may meet.
+    //     // lowest cluster number becomes the cluster number for new cluster.
+    //     // by using cluster number container, we can update ALL the cluster numbers 
+    //     // on every node in a cluster by updaing the value in one node's cluster containter.
+    //     // 
+
+    //     if( myMap.has(keyOne) ){
+    //         let obj = myMap.get(keyOne);
+    //         obj.childs.add(keyTwo);
+    //         obj.descendents.add(keyTwo);
+    //         if( ! myMap.has(keyTwo) ){
+    //             let objTwo = myMap.get(keyTwo);
+    //             clog('objTwo:',objTwo);
+    //             if( obj.cluster.number > objTwo.cluster.number ){ // merge
+    //                 objTwo.cluster.members = 
+    //                     new Set(
+    //                         ...objTwo.cluster.members,
+    //                         ...obj.cluster.members
+    //                     );
+    //                 obj.cluster.number  = objTwo.cluster.number;
+    //                 obj.cluster.members = objTwo.cluster.members;
+    //             }
+    //             else if( obj.cluster.number < objTwo.cluster.number ){
+    //                 obj.cluster.members = 
+    //                 new Set(
+    //                     ...obj.cluster.members,
+    //                     ...objTwo.cluster.members
+    //                 );
+
+    //                 objTwo.cluster.number  = obj.cluster.number;
+    //                 objTwo.cluster.members = obj.cluster.members;
+    //             }
+    //             else{ // if( obj.cluster.cluster_number == objTwo.cluster.cluster_number ){
+    //                 // chill... do nothinng with the clusters
+    //             }
+
+    //         }else{
+    //             obj.cluster.cluser_members.add(keyTwo)
+    //             myMap.set(
+    //                 keyTwo,
+    //                 {
+    //                     key:         keyTwo,
+    //                     childs:      new Set(),
+    //                     descendents: new Set(),
+    //                     dist:        -1, 
+    //                     cluster: obj.cluster
+    //                 }
+    //             );    
+    //         }
+    //     }else{
+    //         let cluster_name_container = {number:keyOne, members:new Set([keyOne])}
+    //         myMap.set(
+    //             keyOne,
+    //             {
+    //                 key:         keyOne,
+    //                 childs:      new Set([keyTwo]),
+    //                 descendents: new Set([keyTwo]),
+    //                 dist:        -1, 
+    //                 cluster: cluster_name_container
+    //             }
+    //         );
+    //     }
+    // }
+    // // dlog()
+    // // dlog('myNS:')
+    // // dlog(myNS)
+    // myNS.forEach((valNodeTwoObj,keyNodeOne)=>{
+    //     valNodeTwoObj.forEach((valDist,keyNodeTwo)=>{
+    //         AddToMap(keyNodeOne,keyNodeTwo);
+    //         // AddToMap(keyNodeTwo,keyNodeOne);
+    //     });
+    // });
+    function AddToMap2(nodeOne,nodeTwo){
+        if( nodeOne.cluster.number < nodeTwo.cluster.number ){
+            if( ! nodeTwo.isTouched ){
+                nodeTwo.cluster  = nodeOne.cluster;
+                nodeTwo.isTouched = true;
+            }else{
+                nodeTwo.cluster.number  = nodeOne.cluster.number;
+            }
+            // clog('nodeTwo:',nodeTwo)
+            nodeOne.cluster.members = 
+                new Set(
+                    ...[nodeOne.cluster.members],
+                    ...[nodeTwo.cluster.members]
+                );
+            nodeTwo.cluster.members = nodeOne.cluster.members;
+        }
+        else if( nodeOne.cluster.number > nodeTwo.cluster.number ){ // merge
+            if( ! nodeTwo.isTouched ){
+                nodeOne.cluster  = nodeTwo.cluster;
+                nodeOne.isTouched = true;
+            }else{
+                nodeOne.cluster.number  = nodeTwo.cluster.number;
+            }
+            nodeTwo.cluster.members = 
+                new Set(
+                    ...[nodeTwo.cluster.members],
+                    ...[nodeOne.cluster.members]
+                );
+            nodeOne.cluster.members = nodeTwo.cluster.members;
+        }
+        nodeOne.isTouched = true;
+        nodeTwo.isTouched = true;
+    }
+
+    myMap.forEach((nodeOne,keyNodeOne)=>{
+        nodeOne.childs.forEach((keyNodeTwo)=>{
+            AddToMap2(nodeOne,myMap.get(keyNodeTwo));
         });
     });
-    // dlog()
-    // dlog('myMap:')
-    // dlog(myMap)
+    dlog()
+    dlog('myMap:')
+    dlog(myMap)
+    myMap.forEach((e,k)=>{
+        clog(' -------------');
+        clog(' ', k ,'=>', e);
+        // clog('   cluster:',e.cluster)
+        // clog(' }');
+    });
 
 
-    function eatTheChilds(idx,desc,depth){
+    function eatTheChilds(idx,obj,depth){
         // let pad = ''.padEnd(depth*2,' ')
         // dlog(`${pad}--------------------------------------`)
         // dlog(`${pad}eatTheChilds(idx:${idx},depth:${depth})`)
@@ -201,35 +233,31 @@ function roadsAndLibraries_debug(n, c_lib, c_road, cities) {
         // dlog(`${pad}  on entry, idx:${idx}:descendents:`, myMap.get(idx).descendents);
         // dlog(`${pad}  on entry, idx:${idx}:childs     :`, myMap.get(idx).childs);
         let count = 0;
-        if( myMap.has(idx) ) {
-            myMast.add(idx);
-            let obj = myMap.get(idx);
-            count = obj.cluster.members.size;
-            obj.cluster.members.forEach((e)=>{
-                if(e===idx) return;
-                myMap.delete(e);
-            });
-        }
+        count = obj.cluster.members.size;
+        obj.cluster.members.forEach((e)=>{
+            if(e===idx) return;
+            myMap.delete(e);
+        });
         // dlog(`${pad}  --------------------------------------`)
         return count;
     }
-    for(let i=1; i<=n; ++i){
-        if( ! myMap.has(i) ) {
-            myMap.set(i,
-                {
-                    key: i,
-                    childs: new Set(), // map key: node number, value: edge length
-                    descendents: new Set(),
-                    dist:-1, // dist to source
-                }
-            );
-        }
-    }
+    // for(let i=1; i<=n; ++i){
+    //     if( ! myMap.has(i) ) {
+    //         myMap.set(i,
+    //             {
+    //                 key: i,
+    //                 childs: new Set(), // map key: node number, value: edge length
+    //                 descendents: new Set(),
+    //                 dist:-1, // dist to source
+    //             }
+    //         );
+    //     }
+    // }
     for(let i=1; i<=n; ++i){
         if( myMap.has(i) ) {
             // myMast.add(i);
             let obj = myMap.get(i);
-            obj.dist = eatTheChilds(i,obj.descendents,0);
+            obj.dist = eatTheChilds(i,obj,0);
             // nd.forEach(f=>{
             //     obj.descendents.desc.add(f)
             // });
