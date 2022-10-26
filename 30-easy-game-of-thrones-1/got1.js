@@ -31,21 +31,46 @@ function readLine() {
 
 function gameOfThrones(s) {
     // Write your code here
-    let arr = s.split('').map(e=>parseInt(e));
+    let arr = s.split('');
+    let dict = 'abcdefghijklmnopqrstuvwxyz'.split('')
     let myMap = new Map();
-    for(let nc = parseInt('a'); nc <= parseInt('z'); ++nc){
-        myMap.set(nc,0);
-    }
+    dict.forEach(c=>{
+        myMap.set(c,0);
+    });
     arr.forEach(c=>{
         myMap.set(c, myMap.get(c)+1)
     });
     let oddCount = 0;
-    myMap.forEach((val,key)=>{
+    myMap.forEach((val,_)=>{
         if(val%2 !== 0){
             ++oddCount;
         }
     });
+    
     if(oddCount>1) return 'NO';
+    return 'YES';
+
+}
+
+function gameOfThrones2(s) {
+    // Write your code here
+    let arr = s.split('');
+    let myMap = new Map();
+    arr.forEach(c=>{
+        if( myMap.get(c) )
+            myMap.set(c, myMap.get(c)+1)
+        else
+            myMap.set(c, 1)
+    });
+    let oddCount = 0;
+    myMap.forEach((val,_)=>{
+        if(val%2 !== 0){
+            ++oddCount;
+            if(oddCount>1){
+                return 'NO';
+            }
+        }
+    });
     return 'YES';
 }
 

@@ -17,14 +17,25 @@ import sys
 
 def gameOfThrones(s):
     # Write your code here
+    d = {}
+    for e in s:
+        if e in d:
+            d[e] += 1
+        else:
+            d[e] = 1
+    oddCount = 0
+    for v in d.values():
+        if v%2 != 0:
+            oddCount += 1
+            if oddCount > 1:
+                return 'NO'
+    return 'YES'
 
 if __name__ == '__main__':
-    fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
     s = input()
-
     result = gameOfThrones(s)
 
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
     fptr.write(result + '\n')
-
     fptr.close()

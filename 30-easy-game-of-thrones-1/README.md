@@ -81,4 +81,4 @@ An example palindrome from the string: ddcceefeeccdd.
 
 ### To Run javascript version:
 
-node got1.js < sample-input.txt 
+$ node got1.js < sample-test-0.txt 
