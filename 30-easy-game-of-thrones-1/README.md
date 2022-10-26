@@ -26,7 +26,7 @@ gameOfThrones has the following parameter(s):
 
 ### Returns
 
--string: either YES or NO
+- string: either YES or NO
 
 ### Input Format
 
@@ -39,7 +39,9 @@ A single line which contains ***s***.
 
 ### Sample Input 0
 
+```
 aaabbbb
+```
 
 ### Sample Output 0
 
