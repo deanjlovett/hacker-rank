@@ -29,7 +29,7 @@ function readLine() {
  * The function accepts STRING s as parameter.
  */
 
-function gameOfThrones(s) {
+function gameOfThrones_old(s) {
     // Write your code here
     let arr = s.split('');
     let dict = 'abcdefghijklmnopqrstuvwxyz'.split('')
@@ -52,7 +52,7 @@ function gameOfThrones(s) {
 
 }
 
-function gameOfThrones2(s) {
+function gameOfThrones(s) {
     // Write your code here
     let arr = s.split('');
     let myMap = new Map();
@@ -64,12 +64,9 @@ function gameOfThrones2(s) {
     });
     let oddCount = 0;
     myMap.forEach((val,_)=>{
-        if(val%2 !== 0){
-            ++oddCount;
-            if(oddCount>1){
-                return 'NO';
-            }
-        }
+        if( val%2 !== 0 && (++oddCount) > 1 ){
+            return 'NO';
+        }    
     });
     return 'YES';
 }
