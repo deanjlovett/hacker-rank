@@ -14,7 +14,7 @@ string gameOfThrones(string s) {
     unordered_map<char, unsigned int> map;
     for(auto it = s.cbegin(); it != s.cend(); ++it){
         if( map.find(*it) != map.end() ){
-            map[*it] = map[*it] + 1;
+            map[*it] ++;
         }else{
             map[*it] = 1;
         }
@@ -33,7 +33,7 @@ int main()
 
     string s;
     getline(cin, s);
-    
+
     string result = gameOfThrones(s);
 
     if( getenv("OUTPUT_PATH") ) {
