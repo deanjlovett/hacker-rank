@@ -39,8 +39,10 @@ int gemstones(int arr_count, char** arr) {
             set[*p - 'a'] = 1;
         }
         for(int i=0; i<26; ++i){
-            if( set[i] > 0 ) map[i] += 1; 
-            set[i]=0;// reset
+            if( set[i] > 0 ) {
+                map[i] += 1;
+                set[i] = 0;// reset
+            } 
         }
     }
     int count=0;
