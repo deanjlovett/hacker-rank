@@ -41,12 +41,28 @@ function gemstones(arr) {
             }else{             
                 myMap.set(e,1);
             }
+            // myMap.set(e, myMap.has(e) ? myMap.get(e) + 1 : 1 );
         });
     });
     let gemcount = 0;
     myMap.forEach(v=>{if(v==arr.length) ++gemcount;});
     return gemcount;
 }
+
+function gemstones_alt(arr) {
+    // Write your code here
+    let myMap = new Map();
+    arr.forEach( s =>{
+        let set = new Set(s.split(''));
+        [...set].forEach( e =>{
+            myMap.set(e, myMap.has(e) ? myMap.get(e) + 1 : 1 );
+        });
+    });
+    let gemcount = 0;
+    myMap.forEach( v =>{if(v==arr.length) ++gemcount;});
+    return gemcount;
+}
+
 
 function main() {
     

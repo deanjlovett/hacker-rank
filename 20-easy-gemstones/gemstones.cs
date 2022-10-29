@@ -28,16 +28,28 @@ class Result
         Dictionary<char, int> mmap = new Dictionary<char, int>();
 
         foreach(string str in arr){
+            foreach(char c in  str) mset.Add( c ); // remove dups
+            foreach(char c in mset) mmap[c] = mmap.ContainsKey(c) ? mmap[c] + 1 : 1;
+            mset.Clear();
+        }
+        int count=0;
+        foreach(var mi in mmap){
+            if( mi.Value == arr.Count() ) ++count;
+        }
+        return count;
+    }
+
+    public static int gemstones_v(List<string> arr)
+    {
+        HashSet<char>         mset = new HashSet<char>();
+        Dictionary<char, int> mmap = new Dictionary<char, int>();
+
+        foreach(string str in arr){
             foreach(char c in str){
                 mset.Add( c );
             }
             foreach(char c in mset){
-                if( mmap.ContainsKey(c) ){
-                    mmap[c] += 1;
-                }else{
-                    mmap[c] = 1;
-                }
-                // mmap[c] = mmap.ContainsKey(c) ? mmcap[c] + 1 : 1;
+                mmap[c] = mmap.ContainsKey(c) ? mmap[c] + 1 : 1;
             }
             mset.Clear();
         }

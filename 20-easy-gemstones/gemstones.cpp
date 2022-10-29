@@ -24,7 +24,7 @@ int gemstones(vector<string> arr) {
 
     for(const auto &str : arr){
         for(const auto &c : str){
-            mset.insert( c -'a');
+            mset.insert( c );
         }
         for(const auto &si : mset){
             MyMapType::const_iterator got = mmap.find(si);
@@ -33,6 +33,7 @@ int gemstones(vector<string> arr) {
             }else{
                 mmap[si] += 1;
             }
+            // mmap[si] = (got == mmap.end()) ? 1 : mmap[si] + 1;
         }
         mset.clear();
     }
