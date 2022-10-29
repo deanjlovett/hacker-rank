@@ -21,15 +21,22 @@ int parse_int(char*);
  * The function is expected to return an INTEGER.
  * The function accepts STRING_ARRAY arr as parameter.
  */
+
+//
+// helper function
+//
+const int letter_count = 26;
 void setAllToZero(int* ppa){
-    printf("setAllToZero");
-    for(int i=0; i<26; ++i){
-        ppa[i] = 0;
+    int *p=ppa;
+    for(int i=0; i<letter_count; ++i,++p){
+        *p = 0; // ppa[i] = 0;
     }
 }
 
 int gemstones(int arr_count, char** arr) {
-    int map[26], set[26];
+
+    int map[letter_count];
+    int set[letter_count];
     
     setAllToZero(map);
     setAllToZero(set);    
@@ -38,10 +45,10 @@ int gemstones(int arr_count, char** arr) {
         for(char *p=arr[i]; *p; ++p){
             set[*p - 'a'] = 1;
         }
-        for(int i=0; i<26; ++i){
+        for(int i=0; i<letter_count; ++i){
             if( set[i] > 0 ) {
                 map[i] += 1;
-                set[i] = 0;// reset
+                set[i] = 0;// reset for next round in for loop
             } 
         }
     }
@@ -52,6 +59,12 @@ int gemstones(int arr_count, char** arr) {
     
     return count;
 }
+/* 
+ * Solution to problem is Above  
+ *
+ * Below is the driver
+ * 
+ */
 
 int main()
 {

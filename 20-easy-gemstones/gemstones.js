@@ -62,9 +62,8 @@ function main() {
     const result = gemstones(arr);
 
     //const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
-    let ws = process.env.OUTPUT_PATH || undefined;
-    if(ws != undefined) {
-        ws = fs.createWriteStream(process.env.OUTPUT_PATH);
+    if(process.env.OUTPUT_PATH) {
+        let ws = fs.createWriteStream(process.env.OUTPUT_PATH);
         ws.write(result + '\n');
         ws.end();
     }else{

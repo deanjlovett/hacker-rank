@@ -17,16 +17,16 @@ def gemstones(arr):
     # Write your code here
     d = {}
     for e in arr:
-        se = set(e)
-        for i in se:
+        se = set(e) # use a "set" to eliminate duplicates
+        for i in se: # update count for each letter in the dictionary
             if i in d:
                 d[i] += 1
             else:
                 d[i] = 1
     gemcount = 0
     for v in d.values():
-        if v == len(arr):
-            gemcount += 1
+        if v == len(arr): # if the number of letters found is 
+            gemcount += 1 # the same as the arr count, add to the gem count
     return gemcount
 
 
