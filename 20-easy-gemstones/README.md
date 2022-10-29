@@ -12,7 +12,7 @@ Given a list of minerals embedded in each of the rocks, display the number of ty
 
 ### Example
 
-***arr** = ['abc','abc','bc']
+***arr*** = ['abc','abc','bc']
 
 The minerals ***b*** and ***c*** appear in each rock, so there are _ 2 _ gemstones.
 
