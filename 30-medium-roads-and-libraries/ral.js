@@ -208,7 +208,8 @@ function roadsAndLibraries_debug(n, c_lib, c_road, cities) {
         nodeOne.isTouched = true;
         nodeTwo.isTouched = true;
     }
-
+    dlog()
+    dlog('call AddToMap2:')
     myMap.forEach((nodeOne,keyNodeOne)=>{
         nodeOne.childs.forEach((keyNodeTwo)=>{
             AddToMap2(nodeOne,myMap.get(keyNodeTwo));
@@ -232,13 +233,18 @@ function roadsAndLibraries_debug(n, c_lib, c_road, cities) {
         // dlog(`${pad}  on entry, idx:${idx}:descendents:`, desc);
         // dlog(`${pad}  on entry, idx:${idx}:descendents:`, myMap.get(idx).descendents);
         // dlog(`${pad}  on entry, idx:${idx}:childs     :`, myMap.get(idx).childs);
-        let count = 0;
-        count = obj.cluster.members.size;
-        obj.cluster.members.forEach((e)=>{
-            if(e===idx) return;
-            myMap.delete(e);
+        let count = obj.childs.length;
+        let cdepth = depth + 1;
+        obj.childs.forEach((ic)=>{
+            if(myMap.has(ic)){
+                let child = myMap.get(ic)
+                eatTheChilds(ic,child,cdepth);
+            }
         });
-        // dlog(`${pad}  --------------------------------------`)
+        if(depth>0 || obj.cluster.number != idx){
+            myMap.delete(idx);
+        }
+    // dlog(`${pad}  --------------------------------------`)
         return count;
     }
     // for(let i=1; i<=n; ++i){
@@ -253,6 +259,10 @@ function roadsAndLibraries_debug(n, c_lib, c_road, cities) {
     //         );
     //     }
     // }
+
+    dlog()
+    dlog('call eatTheChildren:')
+
     for(let i=1; i<=n; ++i){
         if( myMap.has(i) ) {
             // myMast.add(i);
@@ -474,7 +484,17 @@ function main() {
             if(varr.length>0){
                 __.log(result)
                 __.log(varr[qItr],'<<== expected:',result===varr[qItr]);
-                if(result!==varr[qItr]) __.log(result-varr[qItr],'$L:',_c_lib,'$R:',_c_road)
+                if(result!==varr[qItr]){
+                    let diff = result-varr[qItr];
+                    __.log(diff,'$L:',_c_lib,'$R:',_c_road)
+                    for(let lc=0;lc*_c_lib<diff;++lc){
+                        // __.log((diff-(lc*_c_lib))%_c_road);
+                        if((diff-(lc*_c_lib))%_c_road === 0){
+                            __.log('#L:',lc,'#R',(diff-(lc*_c_lib))/_c_road)
+                        }
+                    }
+
+                } 
                 __.log();
             }else{
                 __.log(result);
