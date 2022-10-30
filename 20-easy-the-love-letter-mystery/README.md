@@ -72,8 +72,12 @@ cba
 4. For the fourth query, **c**ba → **b**ba → aba.
 
 
+# Solutions:
+
+2022-10-30: Completed solution in C & Python
+
 # how to run
 
 ### To Run javascript version:
 
-$ node got1.js < sample-test-0.txt 
+$ node tlm.js < sample-input.txt 
