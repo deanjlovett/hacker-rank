@@ -20,11 +20,11 @@ Complete the shortestReach function in the editor below. It should return an arr
 shortestReach has the following parameter(s):
 
 
-• n: the number of nodes in the graph
+- n: the number of nodes in the graph
 
-• edges: a 2D array of integers where each *edges[i]* consists of three integers that represent the start and end nodes of an edge, followed by its length
+- edges: a 2D array of integers where each *edges[i]* consists of three integers that represent the start and end nodes of an edge, followed by its length
 
-• s: the start node number
+- s: the start node number
 
 
 ### Input Format
