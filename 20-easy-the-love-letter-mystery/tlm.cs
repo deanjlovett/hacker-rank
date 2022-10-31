@@ -25,8 +25,8 @@ class Result
     public static int theLoveLetterMystery(string s)
     {
         int count = 0;
-        vector<char> arr(s.begin(), s.end());
-        int idx_b = arr.size()-1;
+        char[] arr = s.ToCharArray();
+        int idx_b = arr.Length -1;
         int idx_f = 0;
         for(; idx_f < idx_b; ++idx_f, --idx_b ) {
 
@@ -41,9 +41,7 @@ class Result
             }
         }
         return count;
-
     }
-
 }
 
 class Solution
