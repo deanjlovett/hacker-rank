@@ -51,7 +51,7 @@ function theLoveLetterMystery(s) {
         if( f > b ){
             count += getAscii(f) - getAscii(b);
         }
-        if( b > f ){
+        else if( b > f ){
             count += getAscii(b) - getAscii(f);
         }
     }

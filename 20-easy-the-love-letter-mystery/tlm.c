@@ -27,6 +27,21 @@ int theLoveLetterMystery(char* s) {
     char *pfront = s;                 // pointer to front 
     char *p_back = s + strlen(s) - 1; // pointer to back
     for( ; pfront < p_back; ++pfront, --p_back ){
+        if(      *pfront > *p_back ){ 
+            count += *pfront - *p_back;
+        } 
+        else if( *p_back > *pfront ){ 
+            count += *p_back - *pfront;
+        }
+    }    
+    return count;
+}
+
+int theLoveLetterMystery_terse(char* s) {
+    int count = 0;
+    char *pfront = s;                 // pointer to front 
+    char *p_back = s + strlen(s) - 1; // pointer to back
+    for( ; pfront < p_back; ++pfront, --p_back ){
         if(      *pfront > *p_back ){ count += *pfront - *p_back;} 
         else if( *p_back > *pfront ){ count += *p_back - *pfront;}
     }    

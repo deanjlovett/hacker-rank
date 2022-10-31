@@ -34,7 +34,7 @@ class Result {
             if( f > b ){
                 count += f - b;
             }
-            if( b > f ){
+            else if( b > f ){
                 count += b - f;
             }
         }

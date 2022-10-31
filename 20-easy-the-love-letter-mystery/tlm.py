@@ -21,7 +21,7 @@ def theLoveLetterMystery(s):
     idx_b = len(cl)-1
     for idx_f in range(len(cl)):
         
-        if idx_b <= idx_f: 
+        if idx_b <= idx_f : 
             break
 
         f_ord = ord( cl[idx_f] )
@@ -30,7 +30,7 @@ def theLoveLetterMystery(s):
         if f_ord > b_ord :
             count += f_ord - b_ord
 
-        if b_ord > f_ord :
+        elif b_ord > f_ord :
             count += b_ord - f_ord
 
         idx_b -= 1
