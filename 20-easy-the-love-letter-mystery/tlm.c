@@ -59,7 +59,7 @@ int theLoveLetterMystery_debug(char* s) {
 
 int main()
 {
-    FILE* fptr = fopen(getenv("OUTPUT_PATH"), "w");
+    FILE* fptr = getenv("OUTPUT_PATH") ? fopen(getenv("OUTPUT_PATH"), "w") : stdout;
 
     int q = parse_int(ltrim(rtrim(readline())));
 
@@ -71,7 +71,9 @@ int main()
         fprintf(fptr, "%d\n", result);
     }
 
-    fclose(fptr);
+    if( getenv("OUTPUT_PATH") ) {
+        fclose(fptr);
+    }
 
     return 0;
 }

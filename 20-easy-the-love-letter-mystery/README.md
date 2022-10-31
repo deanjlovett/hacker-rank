@@ -74,7 +74,12 @@ cba
 
 # Solutions:
 
-2022-10-30: Completed solution in C & Python
+2022-10-30: 
+- Completed solution in C & Python
+- algorithm: O(n<sup>2</sup>)
+- Revised algorithm original in C: O(n)
+- Completed solution in Javascript: algorithm: O(n<sup>2</sup>)
+- todo: revise other solutions to the O(n) algorithm
 
 # how to run
 
