@@ -36,7 +36,7 @@ The next ***q*** lines each contain a string  to analyze.
 ### **Constraints**
 
 - 1 ≤ ***q*** ≤ 10
-- 1 ≤ length of ***s*** ≤ 10⁵
+- 1 ≤ length of ***s*** ≤ 10<sup>5</sup>
 - Each string ***s*** will consist only of characters ***A*** and ***B***.
 
 ### **Sample Input**
