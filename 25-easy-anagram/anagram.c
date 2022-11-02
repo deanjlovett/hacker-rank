@@ -28,7 +28,13 @@ int anagram(char* s) {
     if( slen % 2 != 0 ){
         return -1;
     }
-    char map[NUMC];
+    char map[NUMC]; // use an array as a simple map
+                    // use character ascii code minus 'a' as the the index
+                    // we will increment the value for every occurance 
+                    // of that character occurs in the left half of the string
+                    // and decrement the value for every occurance in the right half
+                    // if the number of a given character are the same on both side
+                    // the value at that index will be ZERO
     for(int i=0;i<NUMC;++i){
         map[i] = 0;
     }
@@ -38,9 +44,21 @@ int anagram(char* s) {
         map[*p__left++ - 'a'] += 1;
         map[*p_right++ - 'a'] -= 1; 
     }
+    //
+    // alternate algorithm implementation
+    // 
     // for( ; *p_right; ++p__left,++p_right){
     //     map[*p__left - 'a'] += 1;
     //     map[*p_right - 'a'] -= 1;
+    // }
+    //
+    // alternate algorithm
+    //
+    // char *p__left = s;
+    // char *p_right = s + slen -1;     // start all the way down the string, walk back to the start
+    // while( *p_right > *p__left ){    // stop when the pointers cross
+    //     map[*p__left++ - 'a'] += 1;  // if the given char occurs in both sides
+    //     map[*p_right-- - 'a'] -= 1;  // the same number of time the char count will be ZERO
     // }
     
     int diff_count=0;
