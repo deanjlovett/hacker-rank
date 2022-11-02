@@ -28,24 +28,24 @@ int anagram(char* s) {
     if( slen % 2 != 0 ){
         return -1;
     }
-    char set[26];
+    char map[NUMC];
     for(int i=0;i<NUMC;++i){
-        set[i] = 0;
+        map[i] = 0;
     }
-    char *pl = s;
-    char *pr = s + slen/2;
-    while(*pr){
-        set[*pl++ - 'a'] += 1;
-        set[*pr++ - 'a'] -= 1;
+    char *p__left = s;
+    char *p_right = s + slen/2; // start half way down the string
+    while(*p_right){
+        map[*p__left++ - 'a'] += 1;
+        map[*p_right++ - 'a'] -= 1; 
     }
-    // for( ; *pr; ++pl,++pr){
-    //     set[*pl - 'a'] += 1;
-    //     set[*pr - 'a'] -= 1;
+    // for( ; *p_right; ++p__left,++p_right){
+    //     map[*p__left - 'a'] += 1;
+    //     map[*p_right - 'a'] -= 1;
     // }
     
     int diff_count=0;
     for(int i=0; i<NUMC;++i){
-        diff_count += abs( set[i] );
+        diff_count += abs( map[i] );
     }
     return diff_count/2;
 }
