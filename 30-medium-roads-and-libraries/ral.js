@@ -25,6 +25,7 @@ function readLine() {
 
 const clog = __.clog;
 const dlog = __.dlog;
+const  log = __.log;
 
 
 /*
@@ -259,6 +260,14 @@ function roadsAndLibraries_debug(n, c_lib, c_road, cities) {
     //         );
     //     }
     // }
+    dlog()
+    dlog('count the clusters:')
+    let cluster_count = 0;
+    myMap.forEach((v,k)=>{
+        if(k===v.cluster.number){
+            ++cluster_count;
+        }
+    });
 
     dlog()
     dlog('call eatTheChildren:')
@@ -273,14 +282,16 @@ function roadsAndLibraries_debug(n, c_lib, c_road, cities) {
             // });
         }
     }
+    
     dlog()
     dlog('myMap:')
     dlog(myMap)
-    clog()
-    clog('          # cities:', n);
-    clog('clusters of cities:', myMap.size)
-    clog('       min # roads:', n - myMap.size)
-    clog()
+     log()
+     log('          # cities:', n);
+     log('clusters of cities:', myMap.size)
+     log('clusters of cities:', cluster_count)
+     log('       min # roads:', n - myMap.size)
+     log()
     clog(' lib cost:', c_lib);
     clog('road cost:', c_road);
     clog()
@@ -491,6 +502,13 @@ function main() {
                         // __.log((diff-(lc*_c_lib))%_c_road);
                         if((diff-(lc*_c_lib))%_c_road === 0){
                             __.log('#L:',lc,'#R',(diff-(lc*_c_lib))/_c_road)
+                        }
+                    }
+                    __.log(varr[qItr],'<= expected')
+                    for(let lc=0;lc*_c_lib<varr[qItr];++lc){
+                        // __.log((diff-(lc*_c_lib))%_c_road);
+                        if((varr[qItr]-(lc*_c_lib))%_c_road === 0){
+                            __.log('result: #L:',lc,'#R',(varr[qItr]-(lc*_c_lib))/_c_road)
                         }
                     }
 
