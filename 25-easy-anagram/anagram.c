@@ -26,8 +26,9 @@ int anagram(char* s) {
     const int NUMC = 26;
     int slen = strlen(s);
     if( slen % 2 != 0 ){
-        return -1;
-    }
+        return -1;  // if there are an odd number of chars then you can't split the string evenly in half
+    }               // the two side can NEVER be anagrams
+    
     char map[NUMC]; // use an array as a simple map
                     // use character ascii code minus 'a' as the the index
                     // we will increment the value for every occurance 
@@ -44,6 +45,12 @@ int anagram(char* s) {
         map[*p__left++ - 'a'] += 1;
         map[*p_right++ - 'a'] -= 1; 
     }
+    int diff_count=0;
+    for(int i=0; i<NUMC;++i){
+        diff_count += abs( map[i] );
+    }
+    return diff_count/2;
+}
     //
     // alternate algorithm implementation
     // 
@@ -61,12 +68,6 @@ int anagram(char* s) {
     //     map[*p_right-- - 'a'] -= 1;  // the same number of time the char count will be ZERO
     // }
     
-    int diff_count=0;
-    for(int i=0; i<NUMC;++i){
-        diff_count += abs( map[i] );
-    }
-    return diff_count/2;
-}
 
 int main()
 {
