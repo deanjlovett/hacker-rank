@@ -44,8 +44,28 @@ int parse_int(char*);
  *
  */
  
+ char* twoStrings(char* s1, char* s2) {
+    static char sYES[] = "YES";
+    static char sNO[] = "NO";
+
+    const int kcount=26;
+    int set1[kcount];
+    int *p1 = set1;
+    for(int i=0; i<kcount; ++i,++p1){
+        *p1=0;
+    }
+    for(char *pc=s1; *pc; ++pc){
+        set1[*pc-'a'] = 1;
+    }
+    for(char *pc=s2; *pc; ++pc){
+        if( set1[*pc-'a']>0){
+            return sYES;
+        }
+    }
+    return sNO;
+}
  
-char* twoStrings(char* s1, char* s2) {
+char* twoStrings_old(char* s1, char* s2) {
     static char sYES[] = "YES";
     static char sNO[] = "NO";
 
