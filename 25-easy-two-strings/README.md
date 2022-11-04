@@ -59,3 +59,9 @@ NO
 We have pairs to check:
 1. ***s***1 = "hello", ***s***2 = "world". The substrings "o" and "l" are common to both strings.
 2. ***a*** = "hi", ***b*** = "world. ***s***1 and ***s***2 share no common substrings.
+
+# how to run
+
+### To Run javascript version:
+
+$ node ts.js < test-case-0.txt 
