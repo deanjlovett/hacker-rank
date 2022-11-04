@@ -34,6 +34,15 @@ function readLine() {
 function twoStrings(s1, s2) {
     // Write your code here
     let sa1Set = new Set(s1.split(''));
+    for( let c2 of s2 ) {
+        if( sa1Set.has(c2)) return 'YES'
+    }
+    return 'NO'
+}
+
+function twoStrings_old(s1, s2) {
+    // Write your code here
+    let sa1Set = new Set(s1.split(''));
     let sa2Set = new Set(s2.split(''));
 
     for( let c1 of sa1Set ) {
