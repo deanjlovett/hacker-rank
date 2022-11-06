@@ -51,7 +51,9 @@ char* gameOfThrones(char* s) {
     int oddCount = 0;
     pi=map;
     for(int i=0; i<26; ++i,++pi){
-        if( *pi % 2 != 0 && ++oddCount>1 ) return no;
+        if( *pi % 2 != 0 && ++oddCount>1 ) {
+            return no;
+        }
     }
     return yes;
 }
