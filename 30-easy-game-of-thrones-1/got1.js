@@ -44,10 +44,13 @@ function gameOfThrones_old(s) {
     myMap.forEach((val,_)=>{
         if(val%2 !== 0){
             ++oddCount;
+            if(oddCount>1){
+                return 'NO';
+            }
         }
     });
     
-    if(oddCount>1) return 'NO';
+    // if(oddCount>1) return 'NO';
     return 'YES';
 
 }
