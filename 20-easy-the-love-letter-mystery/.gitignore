@@ -21,3 +21,5 @@ node_modules
 *scratch*
 output.txt
 README.example.md
+*.out.debug.txt
+*.debug.out.txt

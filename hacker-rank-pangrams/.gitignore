@@ -20,3 +20,6 @@ node_modules
 # other odds and ends
 *scratch*
 output.txt
+README.example.md
+*.out.debug.txt
+*.debug.out.txt

@@ -19,5 +19,7 @@ node_modules
 
 # other odds and ends
 *scratch*
+*.out.debug.txt
+*.debug.out.txt
 output.txt
 README.example.md
