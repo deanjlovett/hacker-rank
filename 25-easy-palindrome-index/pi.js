@@ -1,5 +1,7 @@
 'use strict';
 let __ = require('../util'); // my helper functions
+const dlog = __.dlog;
+const log = console.log;
 
 const fs = require('fs');
 
@@ -31,6 +33,79 @@ function readLine() {
  */
 
 function palindromeIndex(s) {
+    // Write your code here
+    
+    const dlog=(...arg)=>{return;}
+
+
+    let arr   = s.split('');
+    let last = arr.length -1;
+    let first = 0;
+    let idx_b = arr.length - 1;
+    let idx_f = 0;
+
+    // let rev_s   = [...arr].reverse().join('');
+    // dlog('s:',s);
+    // dlog('r:',rev_s);
+
+    const findit=( idx_f_in, idx_b_in)=>{
+        dlog(`func findit(idx_f:`,idx_f_in,arr[idx_f_in],`idx_b:`,idx_b_in,arr[idx_b_in]);
+        let idx_f = idx_f_in;
+        let idx_b = idx_b_in;
+        for(; idx_f < idx_b; ++idx_f, --idx_b ) {
+            dlog('  loop:',idx_f,arr[idx_f],':',idx_b,arr[idx_b])
+
+            if( idx_f > last ){
+                dlog('  idx_f:', idx_f, '> last:', last );
+                dlog('  failed on:',idx_f,arr[idx_f],idx_b,arr[idx_b])
+                return {msg:false,fi:--idx_f,bi:++idx_b};
+            }
+            if( idx_b < first ){
+                dlog('  idx_b:', idx_b,'< first:', first );
+                dlog('  failed on:',idx_f,arr[idx_f],idx_b,arr[idx_b])
+                return {msg:false,fi:--idx_f,bi:++idx_b};
+            }
+    
+            let f = arr[idx_f]; // front
+            let b = arr[idx_b]; // back
+    
+            if( f !== b ){
+                dlog('  failed on:',idx_f,arr[idx_f],idx_b,arr[idx_b])
+                return {msg:false,fi:idx_f,bi:idx_b};
+            }
+        }
+        dlog('  success on:',idx_f,arr[idx_f],idx_b,arr[idx_b])
+        return {msg:true,fi:--idx_f,bi:++idx_b};
+    }
+    let robj = findit(idx_f,idx_b);
+    if( robj.msg ){
+        return -1;
+    }
+    idx_f = robj.fi;
+    idx_b = robj.bi;
+    let f = arr[idx_f]; // front
+    let b = arr[idx_b]; // back
+    let fn = arr[idx_f+1]; // front -> next
+    let bn = arr[idx_b-1]; // back  <- next
+    
+    if( fn === b ){
+        dlog('  arr[idx_f+1] == arr[idx_b] :',arr[idx_f+1], '==', arr[idx_b]);
+        let robj = findit(idx_f+1,idx_b);
+        if( robj.msg ){
+            return idx_f;
+        }
+    }
+    if( bn === f ){
+        dlog('  arr[idx_f] == arr[idx_b-1] :', arr[idx_f], '==', arr[idx_b-1]);
+        let robj = findit(idx_f,idx_b-1);
+        if( robj.msg ){
+            return idx_b;
+        }
+    }
+    return -1;
+}
+
+function palindromeIndex_debug(s) {
     // Write your code here
 
     const getAscii=(c)=>{
