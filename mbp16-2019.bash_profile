@@ -10,14 +10,31 @@ a hglr="h|grep git|sort -r | less"
 
 a dir="ls -alF"
 
-a add="git add"
-a gadd="git add"
+a    add="git add"
 a status="git status"
-a gstatus="git status"
 a commit="git commit"
+a   push="git push"
+
+a    gadd="git add"
+a gstatus="git status"
 a gcommit="git commit"
-a push="git push"
-a gpush="git push"
+a   gpush="git push"
+
+a ga="git add"
+a gs="git status"
+a gc="git commit"
+a gcm="git commit -m"
+a gcp=func_gcmp
+a gcmp=func_gcmp
+a gp="git push"
+
+func_gcmp(){
+    if [ -z "$1" ] then
+        echo "You need to supply a comment for the git commit. No argument supplied"
+    else
+        git commit -m $1 && git push
+    fi
+}
 
 func_mcd(){
     mkdir $1;
