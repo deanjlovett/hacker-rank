@@ -29,10 +29,12 @@ a gcmp=func_gcmp
 a gp="git push"
 
 func_gcmp(){
-    if [ -z "$1" ] then
+    if [ -z "$1" ] 
+    then
         echo "You need to supply a comment for the git commit. No argument supplied"
+        return
     else
-        git commit -m $1 && git push
+        git commit -m $1; git push
     fi
 }
 
