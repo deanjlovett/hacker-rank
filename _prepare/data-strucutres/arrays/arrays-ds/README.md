@@ -1,64 +1,57 @@
-# hacker-rank-the-love-letter-mystery
+# hacker-rank-
+# prepare-data-structures-arrays-arrays-ds
 
 ### **Hacker Rank**
 
-Two Strings - 25 - easy
+Arrays - DS - 10 - easy
 
-https://www.hackerrank.com/challenges/two-strings/problem
+https://www.hackerrank.com/challenges/arrays-ds/problem
 
-Given two strings, determine if they share a common substring. A substring may be as small as one character.
+An array is a type of data structure that stores elements of the same type in a contiguous block of memory. In an array, , of size , each memory location has some unique index,  (where ), that can be referenced as  or .
+
+Reverse an array of integers.
+
+### **Note**: If you've already solved our C++ domain's Arrays Introduction challenge, you may want to skip this.
 
 ### **Example**
 
-For example, the words "a", "and", "art" share the common substring . The words "be" and "cat" do not
-share a substring.
+A = [1,2,3]
+
+Return [3,2,1].
 
 ### **Function Description**
 
-Complete the function twoStrings in the editor below. It should return a string, either YES or NO based
-on whether the strings share a common substring.
-twoStrings has the following parameter(s):
-s1, s2: two strings to analyze .
+Complete the function reverseArray in the editor below.
 
-### **Input Format**
+reverseArray has the following parameter(s):
 
-The first line contains a single integer , the number of test cases.
-The following pairs of lines are as follows:
-- The first line contains string ***s***1.
-- The second line contains string ***s***2.
+- int A[n]: the array to reverse
 
-### **Constraints**
+### **Returns**
 
-- ***s1*** and ***s2*** consist of characters in the range ascii[a-z].
-- 1 ≤ ***p*** ≤ 10
-- 1 ≤ |***s***1|,|***s***2| ≤ 10<sup>5</sup>
+- int [n]: the reversed array
 
-### **Output Format**
+### **Input Format
 
-For each pair of strings, return **YES** or **NO**.
+The first line contains an integer, N, the number of integers in A.
+The second line contains N space-separated integers that make up A.
 
-### **Sample Input**
+### **Constraints
+
+- 1 ≤ ***N*** ≤ 10<sup>3</sup>
+- 1 ≤ ***A***[i] ≤ 10<sup>4</sup>, where A[i] is the i<sup>th</sup> integer in A
+
+### **Sample Input 1
 
 ```
-2
-hello
-world
-hi
-world
+4
+1 4 3 2
 ```
-
-### **Sample Output**
+### **Sample Output 1**
 
 ```
-YES
-NO
+2 3 4 1
 ```
-
-### **Explanation**
-
-We have pairs to check:
-1. ***s***1 = "hello", ***s***2 = "world". The substrings "o" and "l" are common to both strings.
-2. ***a*** = "hi", ***b*** = "world. ***s***1 and ***s***2 share no common substrings.
 
 # how to run
 
