@@ -16,13 +16,13 @@ import sys
 
 def printList(arr):
     la = len(arr)
-    if la == 0:
-        print()
-        return
-    pl = str(arr[0])
-    for e in arr[1:]:
-        pl += " " + str(e)
+    pl = ""
+    if la != 0:
+        pl = str(arr[0])
+        for e in arr[1:]:
+            pl += " " + str(e)
     print(pl)
+    return
 
 
 def insertionSort1(n, arr):
