@@ -1,71 +1,60 @@
-// #include <bits/stdc++.h>
-
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 string ltrim(const string &);
 string rtrim(const string &);
+vector<string> split(const string &);
 
 /*
- * Complete the 'gridChallenge' function below.
+ * Complete the 'superDigit' function below.
  *
- * The function is expected to return a STRING.
- * The function accepts STRING_ARRAY grid as parameter.
+ * The function is expected to return an INTEGER.
+ * The function accepts following parameters:
+ *  1. STRING n
+ *  2. INTEGER k
  */
 
-string gridChallenge(vector<string> grid) {
-    vector<string> vret;
-    for( int i=0; i<grid.size(); ++i ){
-        std::vector<char> vc(grid[i].begin(), grid[i].end());
-        std::sort(vc.begin(), vc.end());
-        string s(vc.begin(),vc.end());
-        vret.push_back(s);
-    }
-    for( int i=0,j=1; j<grid.size(); ++i,++j ){
-        if(vret[i]>vret[j]){
-            return std::string("NO");
+int superDigit(string n, int k) {
+    string si(n);
+    long long ni(10);   // fake first value. 
+                        // actual first value might be larger 
+                        // than largest long long
+    while(ni>9){
+        // printf("    while(ni: %d > 10){\n",ni);
+        // for( int i=0; i<si.size(); ++i){
+        ni = 0;
+        // printf("      for( char c : si: %s){\n",si);
+        // cout << "      for( char c : si: "<< si << "){\n";
+        
+        for( char c : si){
+            // printf("        c: %c   ni: %d)\n",c,ni);
+            ni += c-'0';
         }
+        // printf("      ni: %d)\n",ni);
+        si = std::to_string(ni);
     }
-    return std::string("YES");
+    return ni;
 }
 
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
 
-    string t_temp;
-    getline(cin, t_temp);
+    string first_multiple_input_temp;
+    getline(cin, first_multiple_input_temp);
 
-    int t = stoi(ltrim(rtrim(t_temp)));
+    vector<string> first_multiple_input = split(rtrim(first_multiple_input_temp));
 
-    for (int t_itr = 0; t_itr < t; t_itr++) {
-        string n_temp;
-        getline(cin, n_temp);
+    string n = first_multiple_input[0];
 
-        int n = stoi(ltrim(rtrim(n_temp)));
+    int k = stoi(first_multiple_input[1]);
 
-        vector<string> grid(n);
+    int result = superDigit(n, k);
 
-        for (int i = 0; i < n; i++) {
-            string grid_item;
-            getline(cin, grid_item);
+    fout << result << "\n";
 
-            grid[i] = grid_item;
-        }
-
-        string result = gridChallenge(grid);
-
-        if( getenv("OUTPUT_PATH")==NULL){
-            fout << result << "\n";
-        }else{
-            fout << result << "\n";
-        }
-    }
-
-    if( getenv("OUTPUT_PATH")!=NULL){
-        fout.close();
-    }
+    fout.close();
 
     return 0;
 }
@@ -90,4 +79,21 @@ string rtrim(const string &str) {
     );
 
     return s;
+}
+
+vector<string> split(const string &str) {
+    vector<string> tokens;
+
+    string::size_type start = 0;
+    string::size_type end = 0;
+
+    while ((end = str.find(" ", start)) != string::npos) {
+        tokens.push_back(str.substr(start, end - start));
+
+        start = end + 1;
+    }
+
+    tokens.push_back(str.substr(start));
+
+    return tokens;
 }
