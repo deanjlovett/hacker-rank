@@ -56,8 +56,8 @@ a
 function processData(input) {
   //Enter your code here
     
-  let stack = [""];
-  let map = {
+  let stack = [""]; // stack of edit buffers
+  let map = {       // mapping command number to function
     1: my_append = (s)=>{stack.push(  stack.at(-1) + s         )},
     2: my_delete = (k)=>{stack.push(  stack.at(-1).slice(0,-k) )},
     3:  my_print = (k)=>{console.log( stack.at(-1).charAt(k-1) )},
@@ -69,9 +69,10 @@ function processData(input) {
 
   cmds.forEach((e,idx)=>{
       e = e.split(' ');
-      if( e.length<2) e.push("dummy ignore");
-      // map[ e[0] ]( e[1] );
-      let my_func = map[ e[0] ];
+      // hack: only ONE command doesn't take an arg. $#@#! alway pass an arg.
+      if( e.length<2) e.push("dummy ignore"); 
+      // map[ e[0] ]( e[1] );     // terse way
+      let my_func = map[ e[0] ];  // verbose way
       my_func( e[1] );
   });
 } 
