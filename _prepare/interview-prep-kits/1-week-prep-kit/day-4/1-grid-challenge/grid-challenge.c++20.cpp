@@ -1,5 +1,11 @@
 // #include <bits/stdc++.h>
 
+#include <cstdlib>
+#include <string>
+#include <iostream>
+#include <fstream> // ofstream
+#include <vector>
+
 using namespace std;
 
 string ltrim(const string &);
@@ -32,6 +38,8 @@ int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
 
+    ostream myout = getenv("OUTPUT_PATH")==NULL ? cout : fout;
+
     string t_temp;
     getline(cin, t_temp);
 
@@ -54,32 +62,31 @@ int main()
 
         string result = gridChallenge(grid);
 
-        fout << result << "\n";
+        // fout << result << "\n";
+        myout << result << "\n";
     }
-
     fout.close();
+    // if( getenv("OUTPUT_PATH")!=NULL ){
+    //    fout.close();
+    // }
 
     return 0;
 }
 
 string ltrim(const string &str) {
     string s(str);
-
     s.erase(
         s.begin(),
         find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
     );
-
     return s;
 }
 
 string rtrim(const string &str) {
     string s(str);
-
     s.erase(
         find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
         s.end()
     );
-
     return s;
 }
